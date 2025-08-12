@@ -1,0 +1,61 @@
+{
+  "name": "pr-reviewer",
+  "displayName": "PR-Reviewer",
+  "description": "Review PRs and local changes with on-device AI using your acceptance criteria.",
+  "version": "0.0.1",
+  "engines": {
+    "vscode": "^1.101.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "main": "out/extension.js",
+  "activationEvents": [
+    "onCommand:pr-reviewer.review"
+  ],
+  "contributes": {
+    "commands": [
+      {
+        "command": "pr-reviewer.review",
+        "title": "AI Review: Review Current Changes",
+        "category": "AI Review"
+      }
+    ],
+    "configuration": {
+      "type": "object",
+      "title": "AI Reviewer",
+      "properties": {
+        "aiReviewer.model": {
+          "type": "string",
+          "default": "llama3.1:8b",
+          "description": "Ollama model name (e.g., llama3.1:8b)"
+        },
+        "aiReviewer.remoteUrl": {
+          "type": "string",
+          "default": "",
+          "description": "Optional: your own reviewer API endpoint instead of local Ollama"
+        }
+      }
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "npm run check-types && node esbuild.js",
+    "watch": "node esbuild.js --watch",
+    "check-types": "tsc --noEmit",
+    "lint": "eslint .",
+    "test": "node .vscode-test.mjs"
+  },
+  "devDependencies": {
+    "@types/mocha": "^10.0.10",
+    "@types/node": "^20.12.12",
+    "@types/vscode": "1.101.0",
+    "@typescript-eslint/eslint-plugin": "^8.39.0",
+    "@typescript-eslint/parser": "^8.39.0",
+    "esbuild": "^0.25.8",
+    "eslint": "^9.32.0",
+    "mocha": "^11.7.1",
+    "typescript": "^5.5.4",
+    "undici": "^7.13.0"
+  }
+}
